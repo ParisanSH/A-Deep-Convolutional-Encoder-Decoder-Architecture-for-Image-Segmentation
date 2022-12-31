@@ -11,6 +11,7 @@ The Dataset is available here: https://drive.google.com/file/d/1nnb-p_IWpOjuSx91
 # Steps 
 
 ➢ Images have been divided into two groups, real images and mask images, at 256 pixels on the x-axis of each image.
+
 ➢ The U-Net architecture* has been implemented and trained with train images. (* U-Net architecture is a deep learning image segmentation architecture introduced by Olaf Ronneberger, Philipp Fischer, and Thomas Brox in 2015. Its U shape design consists of two parts. The left side is known as the contracting path or encoder path, where repeated typical convolutions are applied followed by ReLU and max pooling operations. The right side is known as the expansive path which has transposed 2D convolutional layers where the upsampling technique is performed.
 
 ➢  The model has been evaluated with test images, and the predicted outputs have been compared with mask images.
