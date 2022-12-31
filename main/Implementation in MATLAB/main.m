@@ -1,11 +1,9 @@
-%Farshid Pirbonyeh_______40033608
-%NNDL_Prj_#3
 clc
 clear 
 close all
 %{
 %Importing images addresses
-imds = imageDatastore("G:\Arshad\TERM2\Deep\Prj3\Dataset",...
+imds = imageDatastore("Dataset",...
     "IncludeSubfolders",true,"LabelSource","foldernames","FileExtensions",[".jpg",".png"]);
 %Dividing Test  and Train Images
 [n,m]=size(imds.Files);
@@ -36,7 +34,7 @@ end
 %% Storing
 %{
 %Train Reals
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Train images';
+ImageFolder ='Train images';
 for i=1:1500
     J=(i+200);
     name=strcat('v',num2str(J));
@@ -45,7 +43,7 @@ for i=1:1500
     imwrite(realTr,imgName) ;
 end
 %Test Reals
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Test images';
+ImageFolder ='Test images';
 for i=1:200
     name=strcat('v',num2str(i));
     realTe=Test_Reals.(name); 
@@ -54,7 +52,7 @@ for i=1:200
 end
 
 %Train Masks
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Train masks';
+ImageFolder ='Train masks';
 for i=1:1500
     J=(i+200);
     name=strcat('v',num2str(J));
@@ -64,7 +62,7 @@ for i=1:1500
 end
 
 %Test Masks
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Test masks';
+ImageFolder ='Test masks';
 for i=1:200
     name=strcat('v',num2str(i));
     unmasked=Test_Masks.(name);
@@ -75,7 +73,7 @@ end
 %%
 %All Masks
 %{
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\All Masks';
+ImageFolder ='All Masks';
 for i=1:1500
    J=(i+200);
     name=strcat('v',num2str(J));
@@ -96,13 +94,13 @@ end
 %{
 
 %Masks Datastore
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\All Masks';
+dataDir='All Masks';
 Masks_DIR= fullfile(dataDir);
 Masks_imd=imageDatastore(Masks_DIR);
 
 
 %Seprable
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Test SEP L';
+ImageFolder ='Test SEP L';
 for i=1:1:200
     Maskedl=imread(Masks_imd.Files{i,1});
     L = imsegkmeans(Maskedl,11);
@@ -115,7 +113,7 @@ for i=1:1:200
     imwrite(kkk,imgName) ;
 end
 
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Train SEP L';
+ImageFolder ='Train SEP L';
 for i=201:1:1700
     J=i-200;
     Maskedl=imread(Masks_imd.Files{i,1});
@@ -170,7 +168,7 @@ for i=a:1:c
 end
 
 
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Kmeans together';
+ImageFolder ='';
 name=strcat('v',num2str(num));
 kkk=uint8(Blocks);
      imgName = [ImageFolder,'\',num2str(num),'.png'] ;
@@ -188,64 +186,31 @@ b=b+256;
     a=a+256;
     v=v+50;
 end
-%}
-%%
-%Dividing Test AND Trains Labeled
-%{
-%Importing images addresses
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\All Labels';
-Labels_DIR= fullfile(dataDir);
-Labels_imd=imageDatastore(Labels_DIR);
-
-for t1=1:200
-    TE_lAB.Files{t1,1}=Labels_imd.Files{t1,1};  
-end
-
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Te.la';
-for i=1:200
-    Lab=imread(TE_lAB.Files{i,1});
-    imgName = [ImageFolder,'\Lab',num2str(i),'.jpg'] ;
-    imwrite(Lab,imgName) ;
-end
-
-
-for t2=201:n
-    TR_lAB.Files{t2,1}=Labels_imd.Files{t2,1}; 
-end
-ImageFolder ='G:\Arshad\TERM2\Deep\Prj3\Last.T\Tr.la';
-for i=1:1500
-    J=i+200;
-    Lab=imread(TR_lAB.Files{J,1});
-    imgName = [ImageFolder,'\Lab',num2str(i),'.jpg'] ;
-    imwrite(Lab,imgName) ;
-end
-%}
-%% New DATASTORES
 
 %Real Train Inputs
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\Train images';
+dataDir='Train images';
 Train_DIR= fullfile(dataDir);
 Train_imd=imageDatastore(Train_DIR);
 %Masks Trains 
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\Train masks';
+dataDir='Train masks';
 Train_Mask_DIR= fullfile(dataDir);
 Train_Mask_imd=imageDatastore(Train_Mask_DIR);
 
 %Real Test inputs
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\Test images';
+dataDir='Test images';
 Test_DIR= fullfile(dataDir);
 Test_imd=imageDatastore(Test_DIR);
 %Masks Test 
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\Test masks';
+dataDir='Test masks';
 Test_Mask_DIR= fullfile(dataDir);
 Test_Mask_imd=imageDatastore(Test_Mask_DIR);
 
 % Trains Labels
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\Train Labels';
+dataDir='Train Labels';
 Train_Labels_DIR= fullfile(dataDir);
 Train_Labels_imd=imageDatastore(Train_Labels_DIR);
 % Test Labels
-dataDir='G:\Arshad\TERM2\Deep\Prj3\Last.T\Test Labels';
+dataDir='Test Labels';
 Test_DIR= fullfile(dataDir);
 Test_Labels_imd=imageDatastore(Test_DIR);
 
@@ -284,7 +249,7 @@ options = trainingOptions('sgdm', ...
 %'Plots','training-progress'
 net = trainNetwork(ds,lgraph,options);
 
-pwd='G:\Arshad\TERM2\Deep\Prj3\Last.T\Outputs';
+pwd='Outputs';
 pxdsResults = semanticseg(Test_imd,net, ...
     'MiniBatchSize',1, ...
     'WriteLocation',pwd, ...
